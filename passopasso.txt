@@ -1,0 +1,22 @@
+Installazione ambiente virtuale
+Creazione ambiente virtuale: python -m venv .venv
+Attivazione ambiente virtuale: .\.venv\Scripts\activate
+Disattivazione ambiente virtuale: deactivate
+
+Installazione librerie
+pip install flask
+pip install bcrypt
+pip install flask-bcrypt
+pip install flask-login
+pip install flask-sqlalchemy
+pip install flask-wtf
+pip install idna
+pip install dnspython
+pip install email_validator
+
+
+
+
+
+
+

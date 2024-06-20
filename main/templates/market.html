@@ -1,0 +1,94 @@
+{% extends "home.html" %} {% block title %} Perfect Product Market - Acquisto {%
+endblock %} {% block content %}
+
+<div class="container">
+    <div class="row">
+        <!-- Prodotti disponibili -->
+        <div class="col-8">
+            <h2>Prodotti disponibili</h2>
+            <p>Scegli un prodotto per inserirlo nel carrello</p>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Servizio</th>
+                        <th>Codice</th>
+                        <th>Prezzo</th>
+                        <th>Opzioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Accesso alla tabella prodotti e alle finestre modali  -->
+                    {% for item in items %} {% include 'includes/modals.html' %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.servizio }}</td>
+                        <td>{{ item.codice }}</td>
+                        <td>€ {{ item.prezzo }}</td>
+                        <td>
+                            <button
+                                type="button"
+                                class="btn btn-outline-info"
+                                data-bs-toggle="modal"
+                                data-bs-target="#Modal-MoreInfo-{{ item.id }}"
+                            >
+                                Maggiori informazioni
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-outline-success"
+                                data-bs-toggle="modal"
+                                data-bs-target="#Modal-PurchaseConfirm-{{ item.id }}"
+                            >
+                                Aggiungi
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Carrello -->
+        <div class="col-4">
+            <h2>Carrello</h2>
+            <p>Elenco prodotti acquistati</p>
+
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Servizio</th>
+                        <th>Prezzo</th>
+                        <th>Quantità</th>
+                        <th>Opzioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for owned_item in owned_items %} {% include
+                    'includes/own_modals.html' %}
+                    <tr>
+                        <td>{{ owned_item.id }}</td>
+                        <td>{{ owned_item.servizio }}</td>
+                        <td>€ {{ owned_item.prezzo }}</td>
+                        <td></td>
+                        <td>
+                            <button
+                                type="button"
+                                class="btn btn-outline-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#Modal-SellingConfirm-{{ owned_item.id }}"
+                            >
+                                Rimuovi
+                            </button>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+            <strong>Totale: € {{ current_user.budget }}</strong>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

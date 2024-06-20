@@ -1,0 +1,113 @@
+{% import "macros.html" as macros %}
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <title>{% block title %} Perfect Product Market {% endblock %}</title>
+    </head>
+    <body>
+        <!-- Inclusione dei menu di navigazione per tutte le pagine del sito-->
+        <header>{% include "_navmenu.html" %}</header>
+
+        <!-- Predisposizione spazio dei messaggi nella parte alta della pagina -->
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var alertDivs = document.querySelectorAll('.alert');
+                for (var i = 0; i < alertDivs.length; i++) {
+                    alertDivs[i].addEventListener('click', function () {
+                        this.classList.add('d-none'); // Hide the div
+                    });
+                }
+            });
+        </script>
+        <div class="alert-container">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">[x] {{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+
+        <!-- Sezione del contenuto -->
+
+        {% block content %}
+        <div
+            id="home-content"
+            class="container-fluid vh-100 d-flex flex-column align-items-center"
+        >
+            <div
+                class="col-md-5 p-lg-5 mx-auto text-center"
+                style="
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                "
+            >
+                <h1 class="display-4 fw-normal">Perfect Product Market</h1>
+                <p class="lead fw-normal">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Sed et duo voluptua feugiat at ut sanctus dolor enim
+                    nisl et. Sed tempor lorem eum voluptua elitr justo sed kasd
+                    stet elit lorem. <br />At stet consequat dolores nonumy
+                    lorem lorem sit dolore takimata enim amet in nostrud kasd
+                    facilisis. Exerci dolore iusto rebum justo et dolor.
+                </p>
+                <a class="btn btn-primary" href="{{ url_for('market') }}"
+                    >Acquista</a
+                >
+            </div>
+        </div>
+        {% endblock content %}
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+    <!-- Footer -->
+    <footer class="bg-light fixed-bottom">
+        <div class="container p-4 text-center">
+            <div id="theme-switch" class="d-flex justify-content-center">
+                {{ macros.light_or_dark_mode("body") }}
+            </div>
+
+            <div display="block" class="container p-4 text-center">
+                <div class="d-flex justify-content-center">
+                    <p id="data" class="text-muted mb-0 ms-2"></p>
+                    <p class="text-muted mb-0 ms-2">&copy; PPM 2024</p>
+
+                    <script src="../static/script/script.js"></script>
+                </div>
+            </div>
+        </div>
+    </footer>
+</html>
